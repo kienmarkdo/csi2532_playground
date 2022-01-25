@@ -1,4 +1,3 @@
 # csi2532_playground
-Laboratoire 1 pour le cours CSI2532.
-
-Faire un changement pour le commit.
+Une place pour tous les laboratoires du cours CSI 2532 - Bases de données I.
+A place for all of the labs in the course CSI 2532 - Databases I.
