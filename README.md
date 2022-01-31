@@ -5,4 +5,4 @@ Voir les labos en cliquant sur les différentes branches (i.e.: labo1 est add_tx
 
 A place for all of the labs in the course CSI 2532 - Databases I.
 
-To see the labs, click on the different branches (i.e.: lab1 is add_txt, lab2 is test_2, lab3 is labo_03).
+To see the labs, click on the different branches (i.e.: lab1 is add_txt, lab2 is test_2, lab3 is labo_03...).
