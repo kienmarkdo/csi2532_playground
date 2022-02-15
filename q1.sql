@@ -1,17 +1,16 @@
 -- create
-CREATE TABLE Professor (
-	ssn INTEGER PRIMARY KEY,
-	course_id VARCHAR(255),
-	full_name VARCHAR(255),
-	times_taught INTEGER
+CREATE TABLE professeur (
+	id_p varchar(255) PRIMARY KEY
 );
 
-CREATE TABLE Course (
-	course_id PRIMARY KEY,
-	course_name VARCHAR(255),
-	semester_date VARCHAR(255),
-	is_recorded bool
+CREATE TABLE cours (
+	id_c varchar(5) PRIMARY KEY -- exemples: H2022, E2022, A2022 --
 );
 
--- insert
-
+CREATE TABLE enseigner (
+	id_p varchar(5),
+	id_c varchar(255),
+	FOREIGN KEY (id_p) REFERENCES professeur(id_p), -- Remarque: les parenthèses sont requis --
+	FOREIGN KEY (id_c) REFERENCES cours(id_c),
+	PRIMARY KEY (id_p, id_c)
+);
