@@ -1,6 +1,6 @@
--- q1 Les professeurs peuvent enseigner le
--- même cours sur plusieurs semestres et seule
--- la plus récente doit être enregistrée.
+-- q5 Les professeurs peuvent enseigner le
+-- même cours sur plusieurs semestres et
+-- chaque doit être enregistrée.
 
 CREATE TABLE professeur (
 	id_p varchar(255) PRIMARY KEY
