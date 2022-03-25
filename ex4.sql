@@ -14,7 +14,7 @@ BEGIN
         SET author_sum_rating = SUM(
             (
                 SELECT b.authorid, a.authorid
-                FROM book AS b, author AS a,
+                FROM book AS b, author AS a
                 WHERE b.authorid = a.authorid
             )
         );
