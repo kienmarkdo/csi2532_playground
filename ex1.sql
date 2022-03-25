@@ -7,7 +7,7 @@ CREATE TABLE book (
     authorid INTEGER,
     amount NUMERIC(7,2),
     rating INTEGER,
-    booktype VARCHAR(25)
+    booktype VARCHAR(25),
 
     -- Contraintes
 
@@ -17,7 +17,7 @@ CREATE TABLE book (
         booktype = "Adult non-fiction" OR
         booktype = "Youth fiction" OR
         booktype = "Youth non-fiction"
-    )
+    ),
 
     PRIMARY KEY (bookid),
     FOREIGN KEY (authorid) REFERENCES author(authorid)
