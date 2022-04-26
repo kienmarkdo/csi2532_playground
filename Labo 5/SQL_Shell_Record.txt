@@ -1,0 +1,178 @@
+postgres=# CREATE DATABASE laboratoire5
+postgres-# ;
+CREATE DATABASE
+postgres=# \c laboratoire5
+You are now connected to database "laboratoire5" as user "postgres".
+laboratoire5=# \dt
+Did not find any relations.
+laboratoire5=# \i C:/Users/trann/Downloads/csi2532_playground/schema.sql
+CREATE TABLE
+laboratoire5=# \dt
+          List of relations
+ Schema |  Name   | Type  |  Owner
+--------+---------+-------+----------
+ public | courses | table | postgres
+(1 row)
+
+
+laboratoire5=# \i C:/Users/trann/Downloads/csi2532_playground/seed.sql
+INSERT 0 7
+laboratoire5=# select * from courses;
+ course_name | semester | professor_name
+-------------+----------+----------------
+ CSI2532     | W-2020   | A
+ CSI2532     | W-2020   | A
+ CSI2532     | W-2029   | A
+ CSI2532     | W-2021   | A
+ CSI2532     | W-2022   | A
+ CSI2532     | W-2024   | A
+ CSI2532     | W-2022   | A
+(7 rows)
+
+
+laboratoire5=# ALTER TABLE courses ADD id integer;
+ALTER TABLE
+laboratoire5=# SELECT * courses;
+ERROR:  syntax error at or near "courses"
+LINE 1: SELECT * courses;
+                 ^
+laboratoire5=# SELECT * FROM courses;
+ course_name | semester | professor_name | id
+-------------+----------+----------------+----
+ CSI2532     | W-2020   | A              |
+ CSI2532     | W-2020   | A              |
+ CSI2532     | W-2029   | A              |
+ CSI2532     | W-2021   | A              |
+ CSI2532     | W-2022   | A              |
+ CSI2532     | W-2024   | A              |
+ CSI2532     | W-2022   | A              |
+(7 rows)
+
+
+laboratoire5=# ALTER TABLE courses ADD id integer;
+ERROR:  column "id" of relation "courses" already exists
+laboratoire5=# ALTER TABLE courses ADD PRIMARY KEY(id);
+ERROR:  column "id" of relation "courses" contains null values
+laboratoire5=# \i C:/Users/trann/Downloads/csi2532_playground/migrations/20220214174800-ajout-id.sql
+ALTER TABLE
+ALTER TABLE
+laboratoire5=# SELECT * FROM courses;
+ course_name | semester | professor_name | id
+-------------+----------+----------------+----
+ CSI2532     | W-2020   | A              |  1
+ CSI2532     | W-2020   | A              |  2
+ CSI2532     | W-2029   | A              |  3
+ CSI2532     | W-2021   | A              |  4
+ CSI2532     | W-2022   | A              |  5
+ CSI2532     | W-2024   | A              |  6
+ CSI2532     | W-2022   | A              |  7
+(7 rows)
+
+
+laboratoire5=# \i C:/Users/trann/Downloads/csi2532_playground/migrations/20220214175700-ajout-PK.sql
+ALTER TABLE
+laboratoire5=# \d+ courses
+                                                                   Table "public.courses"
+     Column     |          Type          | Collation | Nullable |               Default               | Storage  | Compression | Stats target | Description
+----------------+------------------------+-----------+----------+-------------------------------------+----------+-------------+--------------+-------------
+ course_name    | character varying(255) |           |          |                                     | extended |             |              |
+ semester       | character varying(255) |           |          |                                     | extended |             |              |
+ professor_name | character varying(255) |           |          |                                     | extended |             |              |
+ id             | integer                |           | not null | nextval('courses_id_seq'::regclass) | plain    |             |              |
+Indexes:
+    "courses_pkey" PRIMARY KEY, btree (id)
+Access method: heap
+
+
+laboratoire5=# SELECT * FROM courses;
+ course_name | semester | professor_name | id
+-------------+----------+----------------+----
+ CSI2532     | W-2020   | A              |  1
+ CSI2532     | W-2020   | A              |  2
+ CSI2532     | W-2029   | A              |  3
+ CSI2532     | W-2021   | A              |  4
+ CSI2532     | W-2022   | A              |  5
+ CSI2532     | W-2024   | A              |  6
+ CSI2532     | W-2022   | A              |  7
+(7 rows)
+
+
+laboratoire5=# \i C:/Users/trann/Downloads/csi2532_playground/migrations/20220214180200-table-migration.sql
+CREATE TABLE
+laboratoire5=# \dt
+           List of relations
+ Schema |    Name    | Type  |  Owner
+--------+------------+-------+----------
+ public | courses    | table | postgres
+ public | migrations | table | postgres
+(2 rows)
+
+
+laboratoire5=# INSERT INTO migrations
+laboratoire5-# VALUES('Ajout ID','20220214174800'),
+laboratoire5-# ('Ajout PK','20220214180200');
+INSERT 0 2
+laboratoire5=# SELECT * FROM migrations;
+ nom_migration | temps_migrations
+---------------+------------------
+ Ajout ID      | 20220214174800
+ Ajout PK      | 20220214180200
+(2 rows)
+
+
+laboratoire5=# SELECT * FROM courses;
+ course_name | semester | professor_name | id
+-------------+----------+----------------+----
+ CSI2532     | W-2020   | A              |  1
+ CSI2532     | W-2020   | A              |  2
+ CSI2532     | W-2029   | A              |  3
+ CSI2532     | W-2021   | A              |  4
+ CSI2532     | W-2022   | A              |  5
+ CSI2532     | W-2024   | A              |  6
+ CSI2532     | W-2022   | A              |  7
+(7 rows)
+
+
+laboratoire5=# \i C:/Users/trann/Downloads/csi2532_playground/migrations/20220214181100-split_semester.sql
+ course_name | session | annee | course_name | semester | professor_name | id
+-------------+---------+-------+-------------+----------+----------------+----
+ CSI2532     | W       | 2020  | CSI2532     | W-2020   | A              |  1
+ CSI2532     | W       | 2020  | CSI2532     | W-2020   | A              |  2
+ CSI2532     | W       | 2029  | CSI2532     | W-2029   | A              |  3
+ CSI2532     | W       | 2021  | CSI2532     | W-2021   | A              |  4
+ CSI2532     | W       | 2022  | CSI2532     | W-2022   | A              |  5
+ CSI2532     | W       | 2024  | CSI2532     | W-2024   | A              |  6
+ CSI2532     | W       | 2022  | CSI2532     | W-2022   | A              |  7
+(7 rows)
+
+
+laboratoire5=# CREATE DATABASE temp;
+CREATE DATABASE
+laboratoire5=# \c temp
+You are now connected to database "temp" as user "postgres".
+temp=# \i C:/Users/trann/Downloads/csi2532_playground/schema.sql
+CREATE TABLE
+temp=# \i C:/Users/trann/Downloads/csi2532_playground/seed.sql
+INSERT 0 7
+temp=# \i "C:\Users\trann\Downloads\csi2532_playground\migrations\20220214174800-ajout-id.sql"
+unrecognized win32 error code: 123"C:/Users/trann/Downloads/csi2532_playground/migrations/20220214174800-ajout-id.sql: Invalid argument
+temp=# \i C:/Users/trann/Downloads/csi2532_playground/migrations/20220214174800-ajout-id.sql
+ALTER TABLE
+temp=# \i C:/Users/trann/Downloads/csi2532_playground/migrations/20220214175700-ajout-PK.sql
+ALTER TABLE
+temp=# \i C:/Users/trann/Downloads/csi2532_playground/migrations/20220214180200-table-migration.sql
+CREATE TABLE
+temp=# \i C:/Users/trann/Downloads/csi2532_playground/migrations/20220214181100-split_semester.sql
+ course_name | session | annee | course_name | semester | professor_name | id
+-------------+---------+-------+-------------+----------+----------------+----
+ CSI2532     | W       | 2020  | CSI2532     | W-2020   | A              |  1
+ CSI2532     | W       | 2020  | CSI2532     | W-2020   | A              |  2
+ CSI2532     | W       | 2029  | CSI2532     | W-2029   | A              |  3
+ CSI2532     | W       | 2021  | CSI2532     | W-2021   | A              |  4
+ CSI2532     | W       | 2022  | CSI2532     | W-2022   | A              |  5
+ CSI2532     | W       | 2024  | CSI2532     | W-2024   | A              |  6
+ CSI2532     | W       | 2022  | CSI2532     | W-2022   | A              |  7
+(7 rows)
+
+
+temp=#
