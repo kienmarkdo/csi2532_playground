@@ -1,0 +1,132 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Password for user postgres:
+psql (14.1)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# CREATE DATABASE kdo075;
+CREATE DATABASE
+postgres=# \connect kdo075
+You are now connected to database "kdo075" as user "postgres".
+kdo075=# \dt
+Did not find any relations.
+kdo075=# CREATE TABLE clients(
+kdo075(# nom varchar(255),
+kdo075(# id integer);
+CREATE TABLE
+kdo075=# \dt
+          List of relations
+ Schema |  Name   | Type  |  Owner
+--------+---------+-------+----------
+ public | clients | table | postgres
+(1 row)
+
+
+kdo075=# \i C:\Users\trann\Downloads\csi2532_playground\schema.sql
+C:: Permission denied
+kdo075=# \i C:/Users/trann/Downloads/csi2532_playground/schema.sql
+CREATE TABLE
+kdo075=# \dt
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | clients  | table | postgres
+ public | voitures | table | postgres
+(2 rows)
+
+
+kdo075=# \dt
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | clients  | table | postgres
+ public | voitures | table | postgres
+(2 rows)
+
+
+kdo075=# DROP TABLE clients
+kdo075-# \dt
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | clients  | table | postgres
+ public | voitures | table | postgres
+(2 rows)
+
+
+kdo075-# DROP TABLE clients;
+ERROR:  syntax error at or near "DROP"
+LINE 2: DROP TABLE clients;
+        ^
+kdo075=# \dt
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | clients  | table | postgres
+ public | voitures | table | postgres
+(2 rows)
+
+
+kdo075=# DROP TABLE voitures;
+DROP TABLE
+kdo075=# \dt
+          List of relations
+ Schema |  Name   | Type  |  Owner
+--------+---------+-------+----------
+ public | clients | table | postgres
+(1 row)
+
+
+kdo075=# DROP TABLE clients;
+DROP TABLE
+kdo075=# \dt
+Did not find any relations.
+kdo075=# \i C:/Users/trann/Downloads/csi2532_playground/schema.sql
+CREATE TABLE
+CREATE TABLE
+kdo075=# \dt
+           List of relations
+ Schema |    Name    | Type  |  Owner
+--------+------------+-------+----------
+ public | course     | table | postgres
+ public | department | table | postgres
+(2 rows)
+
+
+kdo075=# \i C:/Users/trann/Downloads/csi2532_playground/seed.sql
+INSERT 0 7
+INSERT 0 13
+kdo075=# \dt
+           List of relations
+ Schema |    Name    | Type  |  Owner
+--------+------------+-------+----------
+ public | course     | table | postgres
+ public | department | table | postgres
+(2 rows)
+
+
+kdo075=# \i C:/Users/trann/Downloads/csi2532_playground/test.sql
+ course_id |           title            | dept_name  | credits
+-----------+----------------------------+------------+---------
+ BIO-101   | Intro. to Biology          | Biology    |       4
+ BIO-301   | Genetics                   | Biology    |       4
+ BIO-399   | Computational Biology      | Biology    |       3
+ CS-101    | Intro. to Computer Science | Comp. Sci. |       4
+ CS-190    | Game Design                | Comp. Sci. |       4
+ CS-315    | Robotics                   | Comp. Sci. |       3
+ CS-319    | Image Processing           | Comp. Sci. |       3
+ CS-347    | Database System Concepts   | Comp. Sci. |       3
+ EE-181    | Intro. to Digital Systems  | Elec. Eng. |       3
+ FIN-201   | Investment Banking         | Finance    |       3
+ HIS-351   | World History              | History    |       3
+ MU-199    | Music Video Production     | Music      |       3
+ PHY-101   | Physical Principles        | Physics    |       4
+(13 rows)
+
+
+kdo075=#
